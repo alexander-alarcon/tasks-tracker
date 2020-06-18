@@ -2,28 +2,28 @@ import React from 'react';
 
 function Todo() {
   return (
-    <div className="my-4 last:mb-0 p-4 bg-white border-l-8 border-teal-300 shadow">
-      <div className="todo__header">
-        <div className="flex justify-between items-center">
+    <div className="relative my-4 last:mb-0 p-4 bg-white border-l-8 border-teal-300 shadow">
+      <div className="todo__header flex items-center">
+        <div className="flex-1">
+          <div className="font-bold">Todo title</div>
           <span className="text-gray-700 text-xs italic">
             {new Date().toUTCString()}
           </span>
-          <div className="actions flex items-center text-sm">
-            <span className="material-icons cursor-pointer text-gray-600">
-              check_box
-            </span>
-            <span className="material-icons cursor-pointer text-gray-600">
-              check_box_outline_blank
-            </span>
-            <span className="material-icons cursor-pointer text-gray-600">
-              edit
-            </span>
-            <span className="material-icons cursor-pointer text-gray-600">
-              delete
-            </span>
-          </div>
         </div>
-        <span className="font-bold">Todo title</span>
+        <div className="actions flex items-center text-sm">
+          <spa className="material-icons cursor-pointer text-gray-600">
+            check_box
+          </spa>
+          <span className="material-icons cursor-pointer text-gray-600">
+            check_box_outline_blank
+          </span>
+          <span className="material-icons cursor-pointer text-gray-600">
+            edit
+          </span>
+          <span className="material-icons cursor-pointer text-gray-600">
+            delete
+          </span>
+        </div>
       </div>
       <div className="todo__content text-sm italic">
         <p>
