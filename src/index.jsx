@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.generated.css';
+import './assets/main.css';
 import { Provider } from 'react-redux';
 
 import App from './containers/App';

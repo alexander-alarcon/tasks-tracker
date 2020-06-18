@@ -1,9 +1,11 @@
 import React from 'react';
 
-function Todo() {
+import Todo from '../../components/Todo';
+
+function TodoList() {
   return (
-    <div className="my-4 last:mb-0 p-4 bg-white border-l-8 border-teal-300 shadow">
-      <div className="todo__header">
+    <div className="wrapper m-4 border border-teal-400">
+      <header className="list__header py-2 px-4 bg-teal-300">
         <div className="flex justify-between items-center">
           <span className="text-gray-700 text-xs italic">
             {new Date().toUTCString()}
@@ -24,15 +26,19 @@ function Todo() {
           </div>
         </div>
         <span className="font-bold">Todo title</span>
+      </header>
+      <div className="px-4 max-h-64 overflow-y-auto">
+        <Todo />
+        <Todo />
+        <Todo />
       </div>
-      <div className="todo__content text-sm italic">
-        <p>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Tenetur velit
-          aliquid totam dignissimos.
-        </p>
-      </div>
+      <footer className="p-4">
+        <button type="button" className="py-2 px-4 bg-teal-300">
+          Add New
+        </button>
+      </footer>
     </div>
   );
 }
 
-export default Todo;
+export default TodoList;
