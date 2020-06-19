@@ -23,24 +23,22 @@ function App() {
   const handleAddTask = () => {
     dispatch(
       taskSlice.actions.addTask({
-        id: 1,
+        id: Date.now(),
         groupId: 1,
         title: 'todo 1',
+        detail: 'lorem ipsum dolor sit amet',
+        date: new Date().toDateString(),
       })
     );
   };
-
-  console.log(groups);
 
   return (
     <div className="App bg-gray-200 flex flex-col min-h-screen">
       <div className="relative flex flex-1 mt-16 sm:mb-16 sm:mt-0">
         <div className="lists__container grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 overflow-auto">
-          <TodoList />
-          <TodoList />
-          <TodoList />
-          <TodoList />
-          <TodoList />
+          {groups.map((group) => (
+            <TodoList key={group.id} group={group} />
+          ))}
         </div>
       </div>
       <Footer>
