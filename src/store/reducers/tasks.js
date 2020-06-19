@@ -5,6 +5,7 @@ const taskAdapter = createEntityAdapter({});
 export const globalTasksSelector = taskAdapter.getSelectors(
   (state) => state.task
 );
+
 const taskSlice = createSlice({
   name: 'tasks',
   initialState: taskAdapter.getInitialState(),
