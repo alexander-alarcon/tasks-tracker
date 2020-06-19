@@ -1,9 +1,10 @@
 /* eslint-disable react/prop-types */
 import React from 'react';
 
-function Button({ text }) {
+function Button({ text, ...props }) {
   return (
-    <button type="button" className="py-2 px-4 bg-teal-300">
+    // eslint-disable-next-line react/jsx-props-no-spreading
+    <button type="button" className="py-2 px-4 bg-teal-300" {...props}>
       {text}
     </button>
   );

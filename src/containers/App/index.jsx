@@ -1,10 +1,37 @@
 import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
+import groupSlice, { getAllGroups } from '../../store/reducers/group';
+import taskSlice from '../../store/reducers/tasks';
 import Button from '../../components/Button';
 import Footer from '../../components/Footer';
 import TodoList from '../TodoList';
 
 function App() {
+  const dispatch = useDispatch();
+  const groups = useSelector(getAllGroups);
+
+  const handleAddGroup = () => {
+    dispatch(
+      groupSlice.actions.addGroup({
+        id: 1,
+        title: 'group 1',
+      })
+    );
+  };
+
+  const handleAddTask = () => {
+    dispatch(
+      taskSlice.actions.addTask({
+        id: 1,
+        groupId: 1,
+        title: 'todo 1',
+      })
+    );
+  };
+
+  console.log(groups);
+
   return (
     <div className="App bg-gray-200 flex flex-col min-h-screen">
       <div className="relative flex flex-1 mt-16 sm:mb-16 sm:mt-0">
@@ -17,7 +44,8 @@ function App() {
         </div>
       </div>
       <Footer>
-        <Button text="New List" />
+        <Button text="New List" onClick={handleAddGroup} />
+        <Button text="New Task" onClick={handleAddTask} />
       </Footer>
     </div>
   );

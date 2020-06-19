@@ -9,9 +9,9 @@ function Header({ title, date }) {
         <span className="text-gray-700 text-xs italic">{date}</span>
       </div>
       <div className="actions flex items-center text-sm">
-        <spa className="material-icons cursor-pointer text-gray-600">
+        <span className="material-icons cursor-pointer text-gray-600">
           check_box
-        </spa>
+        </span>
         <span className="material-icons cursor-pointer text-gray-600">
           check_box_outline_blank
         </span>
