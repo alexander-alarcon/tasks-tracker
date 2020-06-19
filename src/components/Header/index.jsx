@@ -1,5 +1,5 @@
-/* eslint-disable react/prop-types */
 import React from 'react';
+import { string } from 'prop-types';
 
 function Header({ title, date }) {
   return (
@@ -25,5 +25,10 @@ function Header({ title, date }) {
     </header>
   );
 }
+
+Header.propTypes = {
+  title: string.isRequired,
+  date: string.isRequired,
+};
 
 export default Header;

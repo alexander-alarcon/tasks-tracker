@@ -1,10 +1,9 @@
-/* eslint-disable react/prop-types */
-/* eslint-disable no-unused-vars */
 import React from 'react';
+import { shape, string, arrayOf } from 'prop-types';
 
+import Todo, { TodoPropType } from '../../components/Todo';
 import Button from '../../components/Button';
 import Header from '../../components/Header';
-import Todo from '../../components/Todo';
 
 function TodoList({ group }) {
   return (
@@ -23,5 +22,13 @@ function TodoList({ group }) {
     </div>
   );
 }
+
+TodoList.propTypes = {
+  group: shape({
+    id: string.isRequired,
+    title: string.isRequired,
+    tasks: arrayOf(TodoPropType.data),
+  }).isRequired,
+};
 
 export default TodoList;

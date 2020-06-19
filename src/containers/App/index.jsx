@@ -14,7 +14,7 @@ function App() {
   const handleAddGroup = () => {
     dispatch(
       groupSlice.actions.addGroup({
-        id: 1,
+        id: '1',
         title: 'group 1',
       })
     );

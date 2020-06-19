@@ -1,5 +1,5 @@
-/* eslint-disable react/prop-types */
 import React from 'react';
+import { node, arrayOf, oneOfType } from 'prop-types';
 
 function Footer({ children }) {
   return (
@@ -8,5 +8,9 @@ function Footer({ children }) {
     </footer>
   );
 }
+
+Footer.propTypes = {
+  children: oneOfType([arrayOf(node), node]).isRequired,
+};
 
 export default Footer;

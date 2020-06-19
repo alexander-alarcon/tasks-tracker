@@ -1,5 +1,5 @@
-/* eslint-disable react/prop-types */
 import React from 'react';
+import { string } from 'prop-types';
 
 function Button({ text, ...props }) {
   return (
@@ -9,5 +9,9 @@ function Button({ text, ...props }) {
     </button>
   );
 }
+
+Button.propTypes = {
+  text: string.isRequired,
+};
 
 export default Button;

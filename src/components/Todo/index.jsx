@@ -1,5 +1,6 @@
-/* eslint-disable react/prop-types */
 import React from 'react';
+import { shape, string } from 'prop-types';
+
 import Header from '../Header';
 
 function Todo({ data }) {
@@ -13,4 +14,13 @@ function Todo({ data }) {
   );
 }
 
+export const TodoPropType = {
+  data: shape({
+    title: string.isRequired,
+    date: string.isRequired,
+    detail: string.isRequired,
+  }).isRequired,
+};
+
+Todo.propTypes = TodoPropType;
 export default Todo;
