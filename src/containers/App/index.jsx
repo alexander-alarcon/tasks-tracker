@@ -1,31 +1,32 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { getAllGroups } from '../../store/reducers/group';
+import groupSlice, { getAllGroups } from '../../store/reducers/group';
 import taskSlice from '../../store/reducers/tasks';
 import TodoList from '../../components/TodoList';
 import Button from '../../components/Button';
 import Footer from '../../components/Footer';
-
-import COLORS from '../../utils/colors';
 import Modal from '../../components/Modal';
+import Form from '../../components/Form';
+
+import generateId from '../../utils/misc';
+import COLORS from '../../utils/colors';
 
 function App() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const dispatch = useDispatch();
   const groups = useSelector(getAllGroups);
 
-  /* const handleAddGroup = () => {
+  const handleAddGroup = (inputs) => {
     dispatch(
       groupSlice.actions.addGroup({
-        id: '1',
-        title: 'group 1',
-        color: Object.keys(COLORS)[
-          Math.floor(Math.random() * Object.keys(COLORS).length)
-        ],
+        id: generateId(),
+        title: inputs.title,
+        color: 'blue',
       })
     );
-  }; */
+    setIsModalOpen(false);
+  };
 
   const handleAddTask = () => {
     dispatch(
@@ -55,7 +56,14 @@ function App() {
         onClose={handleModalClose}
         onConfirm={handleModalClose}
       >
-        <p>lorem</p>
+        <Form
+          titleConfig={{
+            id: 'title',
+            label: 'Group Title:',
+          }}
+          onSubmit={handleAddGroup}
+          onCancel={handleModalClose}
+        />
       </Modal>
 
       <div className="container relative mt-16 mx-auto sm:mb-16 sm:mt-0">

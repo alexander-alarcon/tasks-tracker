@@ -5,7 +5,7 @@ import ReactDOM from 'react-dom';
 
 const modalRoot = document.getElementById('modal-root');
 
-function Modal({ isOpen, onClose, onConfirm, title, children }) {
+function Modal({ isOpen, onClose, title, children }) {
   const elRef = useRef(document.createElement('div'));
 
   useEffect(() => {
@@ -68,23 +68,6 @@ function Modal({ isOpen, onClose, onConfirm, title, children }) {
           </div>
 
           {children}
-
-          <div className="flex justify-end pt-2">
-            <button
-              type="button"
-              className="px-4 bg-transparent p-3 rounded-lg text-indigo-500 hover:bg-gray-100 hover:text-indigo-400 mr-2"
-              onClick={onClose}
-            >
-              Cancel
-            </button>
-            <button
-              type="button"
-              className="modal-close px-4 bg-indigo-500 p-3 rounded-lg text-white hover:bg-indigo-400"
-              onClick={onConfirm}
-            >
-              Confirm
-            </button>
-          </div>
         </div>
       </div>
     </div>
@@ -96,7 +79,6 @@ function Modal({ isOpen, onClose, onConfirm, title, children }) {
 Modal.propTypes = {
   isOpen: bool.isRequired,
   onClose: func.isRequired,
-  onConfirm: func.isRequired,
   title: string,
   children: oneOfType([arrayOf(node), node]).isRequired,
 };
