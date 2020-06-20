@@ -1,19 +1,21 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import groupSlice, { getAllGroups } from '../../store/reducers/group';
+import { getAllGroups } from '../../store/reducers/group';
 import taskSlice from '../../store/reducers/tasks';
 import TodoList from '../../components/TodoList';
 import Button from '../../components/Button';
 import Footer from '../../components/Footer';
 
 import COLORS from '../../utils/colors';
+import Modal from '../../components/Modal';
 
 function App() {
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const dispatch = useDispatch();
   const groups = useSelector(getAllGroups);
 
-  const handleAddGroup = () => {
+  /* const handleAddGroup = () => {
     dispatch(
       groupSlice.actions.addGroup({
         id: '1',
@@ -23,7 +25,7 @@ function App() {
         ],
       })
     );
-  };
+  }; */
 
   const handleAddTask = () => {
     dispatch(
@@ -37,8 +39,25 @@ function App() {
     );
   };
 
+  const handleModalClose = () => {
+    setIsModalOpen(false);
+  };
+
+  const handleModalOpen = () => {
+    setIsModalOpen(true);
+  };
+
   return (
     <div className="App bg-gray-200 flex flex-col min-h-screen">
+      <Modal
+        title="Add Group"
+        isOpen={isModalOpen}
+        onClose={handleModalClose}
+        onConfirm={handleModalClose}
+      >
+        <p>lorem</p>
+      </Modal>
+
       <div className="container relative mt-16 mx-auto sm:mb-16 sm:mt-0">
         <div className="lists__container grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 grid-rows-max-content overflow-auto">
           {groups.map((group) => (
@@ -49,7 +68,7 @@ function App() {
       <Footer>
         <Button
           text="New List"
-          onClick={handleAddGroup}
+          onClick={handleModalOpen}
           color={COLORS.teal.button}
           width="w-32"
         />
