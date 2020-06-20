@@ -1,5 +1,5 @@
-import React from 'react';
 import { node, arrayOf, oneOfType } from 'prop-types';
+import React from 'react';
 
 function Footer({ children }) {
   return (

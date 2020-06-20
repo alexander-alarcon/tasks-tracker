@@ -1,11 +1,17 @@
-import React from 'react';
 import { shape, string } from 'prop-types';
+import React from 'react';
+import clsx from 'clsx';
 
 import Header from '../Header';
 
-function Todo({ data }) {
+function Todo({ data, borderColor }) {
   return (
-    <div className="relative my-4 last:mb-0 p-4 bg-white border-l-8 border-teal-300 shadow">
+    <div
+      className={clsx(
+        'my-4 p-4 bg-white border-l-8 border-b rounded-md shadow-sm',
+        borderColor
+      )}
+    >
       <Header title={data.title} date={data.date} />
       <div className="todo__content text-sm italic">
         <p>{data.detail}</p>
@@ -20,6 +26,7 @@ export const TodoPropType = {
     date: string.isRequired,
     detail: string.isRequired,
   }).isRequired,
+  borderColor: string.isRequired,
 };
 
 Todo.propTypes = TodoPropType;

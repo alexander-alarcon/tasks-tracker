@@ -290,6 +290,10 @@ module.exports = {
     height: (theme) => ({
       auto: 'auto',
       ...theme('spacing'),
+      '1/5': '20%',
+      '2/5': '40%',
+      '3/5': '60%',
+      '4/5': '80%',
       full: '100%',
       screen: '100vh',
     }),
@@ -334,6 +338,10 @@ module.exports = {
     maxHeight: (theme) => ({
       full: '100%',
       screen: '100vh',
+      '1/5': '20%',
+      '2/5': '40%',
+      '3/5': '60%',
+      '4/5': '80%',
       ...theme('spacing'),
     }),
     maxWidth: (theme, { breakpoints }) => ({
@@ -525,6 +533,7 @@ module.exports = {
       '4': 'repeat(4, minmax(0, 1fr))',
       '5': 'repeat(5, minmax(0, 1fr))',
       '6': 'repeat(6, minmax(0, 1fr))',
+      'max-content': 'max-content',
     },
     gridRow: {
       auto: 'auto',

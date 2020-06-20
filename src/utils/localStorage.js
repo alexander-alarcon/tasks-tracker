@@ -3,7 +3,7 @@ export const saveState = (state) => {
     const serializedState = JSON.stringify(state);
     localStorage.setItem('state', serializedState);
   } catch (err) {
-    console.error(err);
+    localStorage.setItem('state', JSON.stringify({}));
   }
 };
 
