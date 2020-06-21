@@ -1,8 +1,17 @@
-import { shape, string, func } from 'prop-types';
+import { shape, string, func, bool } from 'prop-types';
 import React, { useState } from 'react';
 
-function Form({ titleConfig, detailConfig, onSubmit, onCancel }) {
-  const [inputs, setInputs] = useState({});
+import RadioButton from '../Radio';
+import Button from '../Button';
+
+import COLORS from '../../utils/colors';
+
+function Form({ titleConfig, detailConfig, colors, onSubmit, onCancel }) {
+  const [inputs, setInputs] = useState({
+    title: '',
+    detail: '',
+    color: 'blue',
+  });
 
   const handleChange = ({ target }) => {
     setInputs({
@@ -49,20 +58,41 @@ function Form({ titleConfig, detailConfig, onSubmit, onCancel }) {
           />
         </div>
       )}
-      <button
-        type="button"
-        className="px-4 bg-transparent p-3 rounded-lg text-indigo-500 hover:bg-gray-100 hover:text-indigo-400 mr-2"
-        onClick={onCancel}
-      >
-        Cancel
-      </button>
-      <button
-        type="submit"
-        className="modal-close px-4 bg-indigo-500 p-3 rounded-lg text-white hover:bg-indigo-400"
-        onClick={handleFormSubmit}
-      >
-        Confirm
-      </button>
+
+      <div className="flex flex-col sm:flex-row justify-between items-center">
+        {colors && (
+          <div className="mb-4 sm:mb-0">
+            {Object.keys(COLORS).map((color) => {
+              return (
+                <RadioButton
+                  key={color}
+                  id={`radio-${color}`}
+                  bgColor={COLORS[color].background}
+                  value={color}
+                  checked={inputs.color === color}
+                  onChange={handleChange}
+                />
+              );
+            })}
+          </div>
+        )}
+        <div>
+          <Button
+            text="Cancel"
+            color={inputs.color}
+            onClick={onCancel}
+            variant="secondary"
+            rounded
+          />
+          <Button
+            type="submit"
+            text="Confirm"
+            color={inputs.color}
+            onClick={handleFormSubmit}
+            rounded
+          />
+        </div>
+      </div>
     </form>
   );
 }
@@ -78,10 +108,12 @@ Form.propTypes = {
   }),
   onSubmit: func.isRequired,
   onCancel: func.isRequired,
+  colors: bool,
 };
 
 Form.defaultProps = {
   detailConfig: null,
+  colors: false,
 };
 
 export default Form;

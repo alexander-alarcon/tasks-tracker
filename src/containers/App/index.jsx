@@ -10,7 +10,6 @@ import Modal from '../../components/Modal';
 import Form from '../../components/Form';
 
 import generateId from '../../utils/misc';
-import COLORS from '../../utils/colors';
 
 function App() {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -22,7 +21,8 @@ function App() {
       groupSlice.actions.addGroup({
         id: generateId(),
         title: inputs.title,
-        color: 'blue',
+        color: inputs.color,
+        date: new Date().toDateString(),
       })
     );
     setIsModalOpen(false);
@@ -63,6 +63,7 @@ function App() {
           }}
           onSubmit={handleAddGroup}
           onCancel={handleModalClose}
+          colors
         />
       </Modal>
 
@@ -77,15 +78,10 @@ function App() {
         <Button
           text="New List"
           onClick={handleModalOpen}
-          color={COLORS.teal.button}
-          width="w-32"
+          color="teal"
+          rounded
         />
-        <Button
-          text="New Task"
-          onClick={handleAddTask}
-          color={COLORS.red.button}
-          width="w-32"
-        />
+        <Button text="New Task" onClick={handleAddTask} color="blue" rounded />
       </Footer>
     </div>
   );

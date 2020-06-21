@@ -1,13 +1,20 @@
+/* eslint-disable react/button-has-type */
 /* eslint-disable react/jsx-props-no-spreading */
-import { string } from 'prop-types';
+import { string, oneOf, bool } from 'prop-types';
 import React from 'react';
 import clsx from 'clsx';
 
-function Button({ text, color, width, ...props }) {
+import COLORS from '../../utils/colors';
+
+function Button({ text, color, rounded, size, variant, type, ...props }) {
+  const uiColor = COLORS[color];
   return (
     <button
-      type="button"
-      className={clsx('py-2 px-4', color, width)}
+      type={type}
+      className={clsx('py-2 px-4', uiColor.button[variant], {
+        'rounded-lg': rounded,
+        'w-full': size === 'w-full',
+      })}
       {...props}
     >
       {text}
@@ -16,13 +23,19 @@ function Button({ text, color, width, ...props }) {
 }
 
 Button.defaultProps = {
-  width: 'w-full',
+  variant: 'primary',
+  type: 'button',
+  rounded: false,
+  size: 'w-auto',
 };
 
 Button.propTypes = {
   text: string.isRequired,
   color: string.isRequired,
-  width: string,
+  rounded: bool,
+  size: oneOf(['w-full', 'w-auto']),
+  variant: oneOf(['primary', 'secondary']),
+  type: oneOf(['button', 'reset', 'submit']),
 };
 
 export default Button;

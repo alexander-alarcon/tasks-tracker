@@ -7,6 +7,7 @@ const modalRoot = document.getElementById('modal-root');
 
 function Modal({ isOpen, onClose, title, children }) {
   const elRef = useRef(document.createElement('div'));
+  const closeRef = useRef();
 
   useEffect(() => {
     const el = elRef.current;
@@ -24,12 +25,21 @@ function Modal({ isOpen, onClose, title, children }) {
       }
     }
 
+    function handleFocus(ev) {
+      if (ev.target.nodeName && !elRef.current.contains(ev.target)) {
+        closeRef.current.focus();
+      }
+    }
+
     if (isOpen) {
       window.addEventListener('keyup', handleKeyUp);
+      window.addEventListener('focus', handleFocus, true);
+      closeRef.current.focus();
     }
 
     return () => {
       window.removeEventListener('keyup', handleKeyUp);
+      window.removeEventListener('focus', handleFocus, true);
     };
   }, [isOpen, onClose]);
 
@@ -54,6 +64,7 @@ function Modal({ isOpen, onClose, title, children }) {
               className="modal-close cursor-pointer z-50"
               type="button"
               onClick={onClose}
+              ref={closeRef}
             >
               <svg
                 className="fill-current text-black"

@@ -25,10 +25,10 @@ function TodoList({ group }) {
           color.foreground
         )}
       >
-        <Header title="Group List" date={new Date().toDateString()} />
+        <Header title={group.title} date={group.date} />
       </div>
-      <div>
-        <Button text="New item" color={color.button} />
+      <div className={clsx('border-t', color.border)}>
+        <Button text="New item" color={group.color} size="w-full" />
       </div>
       <div className="px-4 overflow-y-auto">
         {group.tasks.map((task) => (
@@ -43,6 +43,7 @@ TodoList.propTypes = {
   group: shape({
     id: string.isRequired,
     title: string.isRequired,
+    date: string.isRequired,
     tasks: arrayOf(TodoPropType.data),
   }).isRequired,
 };
