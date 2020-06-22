@@ -2,6 +2,8 @@ import { createSlice, createEntityAdapter } from '@reduxjs/toolkit';
 
 const taskAdapter = createEntityAdapter({});
 
+const taksSelector = taskAdapter.getSelectors();
+
 export const globalTasksSelector = taskAdapter.getSelectors(
   (state) => state.task
 );
@@ -28,7 +30,17 @@ const taskSlice = createSlice({
       state.currentId = null;
       state.groupId = null;
     },
-    /* eslint-enable no-param-reassign */
+  },
+  extraReducers: {
+    'groups/removeGroup': (state, { payload: groupId }) => {
+      const tasks = taksSelector.selectAll(state);
+
+      const keys = tasks
+        .filter((task) => task.groupId === groupId)
+        .map((task) => task.id);
+
+      taskAdapter.removeMany(state, keys);
+    },
   },
 });
 
