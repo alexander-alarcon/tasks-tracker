@@ -17,23 +17,6 @@ export const globalGroupSelectors = groupAdapter.getSelectors(
   (state) => state.group
 );
 
-const emptyArray = [];
-const emptyObject = {};
-
-export const getGroupEntities = ({ group }) => group.entities;
-
-export const getModalIsOpen = ({ group }) => group.isModalOpen || false;
-
-export const getModalCurrentId = ({ group }) => group.currentId || null;
-
-export const getModalGroup = createSelector(
-  getGroupEntities,
-  getModalCurrentId,
-  (entities, id) => {
-    return entities[id] || emptyObject;
-  }
-);
-
 export const getAllGroups = (state) => {
   const groups = globalGroupSelectors.selectAll(state);
 
@@ -84,7 +67,7 @@ const groupSlice = createSlice({
       groupAdapter.updateOne(state, {
         id: payload.groupId,
         changes: {
-          tasks: currentTask.filter((g) => g.id !== payload.id),
+          tasks: currentTask.filter((id) => id !== payload.id),
         },
       });
     },

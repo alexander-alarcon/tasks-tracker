@@ -7,6 +7,7 @@ import Button from '../../components/Button';
 import Footer from '../../components/Footer';
 
 import GroupModal from './GroupModal';
+import TaskModal from './TaskModal';
 
 function App() {
   const dispatch = useDispatch();
@@ -35,6 +36,7 @@ function App() {
       </Footer>
 
       <GroupModal />
+      <TaskModal />
     </div>
   );
 }

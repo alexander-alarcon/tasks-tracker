@@ -4,6 +4,7 @@ import React from 'react';
 import clsx from 'clsx';
 
 import groupSlice from '../../store/reducers/group';
+import taskSlice from '../../store/reducers/tasks';
 import Todo, { TodoPropType } from '../Todo';
 import Button from '../Button';
 import Header from '../Header';
@@ -14,11 +15,15 @@ function TodoList({ group }) {
   const dispatch = useDispatch();
   const color = COLORS[group.color || 'blue'];
 
-  const handleOpenModal = () => {
+  const handleNewTask = () => {
+    dispatch(taskSlice.actions.openModal({ groupId: group.id }));
+  };
+
+  const handleEdit = () => {
     dispatch(groupSlice.actions.openModal(group.id));
   };
 
-  const handleRemoveGroup = () => {
+  const handleRemove = () => {
     dispatch(groupSlice.actions.removeGroup(group.id));
   };
 
@@ -39,12 +44,17 @@ function TodoList({ group }) {
         <Header
           title={group.title}
           date={group.date}
-          onEdit={handleOpenModal}
-          onRemove={handleRemoveGroup}
+          onEdit={handleEdit}
+          onRemove={handleRemove}
         />
       </div>
       <div className={clsx('border-t', color.border)}>
-        <Button text="New item" color={group.color} size="w-full" />
+        <Button
+          text="New item"
+          color={group.color}
+          size="w-full"
+          onClick={handleNewTask}
+        />
       </div>
       <div className="px-4 overflow-y-auto">
         {group.tasks.map((task) => (

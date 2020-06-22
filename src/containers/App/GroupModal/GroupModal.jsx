@@ -1,14 +1,18 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
-import groupSlice, {
+import generateId from '../../../utils/misc';
+
+import Modal from '../../../components/Modal';
+import Form from '../../../components/Form';
+
+import groupSlice from '../../../store/reducers/group';
+
+import {
   getModalIsOpen,
   getModalCurrentId,
   getModalGroup,
-} from '../../../store/reducers/group';
-import Modal from '../../../components/Modal';
-import Form from '../../../components/Form';
-import generateId from '../../../utils/misc';
+} from '../../../store/selectors/group';
 
 function GroupModal() {
   const dispatch = useDispatch();
@@ -49,11 +53,13 @@ function GroupModal() {
       onClose={handleClose}
     >
       <Form
-        title="Group Title:"
+        inputs={{
+          title: 'Group Title:',
+          colors: true,
+        }}
         onSubmit={handleSubmit}
         onCancel={handleClose}
         initialValues={group}
-        colors
       />
     </Modal>
   );

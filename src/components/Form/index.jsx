@@ -6,7 +6,12 @@ import Button from '../Button';
 
 import COLORS from '../../utils/colors';
 
-function Form({ title, colors, initialValues, onSubmit, onCancel }) {
+function Form({
+  inputs: { title, detail, colors },
+  initialValues,
+  onSubmit,
+  onCancel,
+}) {
   const [inputs, setInputs] = useState({
     title: initialValues.title || '',
     detail: initialValues.detail || '',
@@ -32,35 +37,38 @@ function Form({ title, colors, initialValues, onSubmit, onCancel }) {
 
   return (
     <form onSubmit={handleFormSubmit}>
-      <div className="flex flex-col sm:justify-between ">
-        <label className="tracking-wide" htmlFor="title">
-          {title}
-        </label>
-        <input
-          className="bg-white border-b border-gray-400 focus:outline-none focus:border-indigo-500 text-base px-4 py-2 mb-4"
-          type="text"
-          id="title"
-          name="title"
-          onChange={handleChange}
-          value={inputs.title}
-        />
-      </div>
-
-      {/* {detailConfig && (
+      {title && (
         <div className="flex flex-col sm:justify-between ">
-          <label className="tracking-wide" htmlFor={detailConfig.id}>
-            {detailConfig.label}
+          <label className="tracking-wide" htmlFor="title">
+            {title}
           </label>
           <input
             className="bg-white border-b border-gray-400 focus:outline-none focus:border-indigo-500 text-base px-4 py-2 mb-4"
             type="text"
-            id={detailConfig.id}
-            name={titleConfig.id}
+            id="title"
+            name="title"
             onChange={handleChange}
+            value={inputs.title}
           />
         </div>
       )}
-      */}
+
+      {detail && (
+        <div className="flex flex-col sm:justify-between ">
+          <label className="tracking-wide" htmlFor="detail">
+            {detail}
+          </label>
+          <input
+            className="bg-white border-b border-gray-400 focus:outline-none focus:border-indigo-500 text-base px-4 py-2 mb-4"
+            type="text"
+            id="detail"
+            name="detail"
+            onChange={handleChange}
+            value={inputs.detail}
+          />
+        </div>
+      )}
+
       <div className="flex flex-col sm:flex-row justify-between items-center">
         {colors && (
           <div className="mb-4 sm:mb-0">
@@ -104,15 +112,14 @@ Form.defaultProps = {
 };
 
 Form.propTypes = {
-  title: string.isRequired,
+  inputs: shape({
+    title: string,
+    detail: string,
+    colors: bool,
+  }).isRequired,
   onSubmit: func.isRequired,
   onCancel: func.isRequired,
   initialValues: shape({}),
-  colors: bool,
-};
-
-Form.defaultProps = {
-  colors: false,
 };
 
 export default Form;
