@@ -4,3 +4,10 @@
 /* purgecss end ignore */
 
 @tailwind utilities;
+
+progress,
+progress::-webkit-progress-bar,
+progress::-webkit-progress-value {
+  vertical-align: top;
+  background-color: transparent;
+}

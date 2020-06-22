@@ -2,6 +2,7 @@ const COLORS = {
   blue: {
     background: 'bg-blue-300',
     lightBackground: 'bg-blue-200',
+    darkBackground: 'bg-blue-500',
     foreground: 'text-blue-900',
     border: 'border-blue-400',
     button: {
@@ -12,6 +13,7 @@ const COLORS = {
   red: {
     background: 'bg-red-300',
     lightBackground: 'bg-red-200',
+    darkBackground: 'bg-red-500',
     foreground: 'text-red-900',
     border: 'border-red-400',
     button: {
@@ -22,6 +24,7 @@ const COLORS = {
   orange: {
     background: 'bg-orange-300',
     lightBackground: 'bg-orange-200',
+    darkBackground: 'bg-orange-500',
     foreground: 'text-orange-900',
     border: 'border-orange-400',
     button: {
@@ -33,6 +36,7 @@ const COLORS = {
   teal: {
     background: 'bg-teal-300',
     lightBackground: 'bg-teal-200',
+    darkBackground: 'bg-teal-500',
     foreground: 'text-teal-900',
     border: 'border-teal-400',
     button: {
@@ -43,6 +47,7 @@ const COLORS = {
   indigo: {
     background: 'bg-indigo-300',
     lightBackground: 'bg-indigo-200',
+    darkBackground: 'bg-indigo-500',
     foreground: 'text-indigo-900',
     border: 'border-indigo-400',
     button: {

@@ -47,6 +47,7 @@ function TodoList({ group }) {
           date={group.date}
           onEdit={handleEdit}
           onRemove={handleRemove}
+          isCompleted={group.progress === 1}
         />
       </div>
       <div className={clsx('border-t', color.border)}>
@@ -55,6 +56,25 @@ function TodoList({ group }) {
           color={group.color}
           size="w-full"
           onClick={handleNewTask}
+        />
+      </div>
+      <div
+        className="relative h-2"
+        style={{
+          backgroundColor: 'rgba(255,255,255,0.2)',
+        }}
+      >
+        <progress
+          className={clsx(
+            'absolute top-0 h-2 w-full transform transition-transform duration-150 ease-in-out appearance-none',
+            color.darkBackground
+          )}
+          style={{
+            '--transform-scale-x': group.progress,
+          }}
+          max="1"
+          min="0"
+          value={group.progress}
         />
       </div>
       <div className="px-4 overflow-y-auto">

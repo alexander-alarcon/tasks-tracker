@@ -22,10 +22,8 @@ export const getAllGroups = createSelector(
   (entities, ids, tasks) => {
     return ids
       .map((id) => entities[id])
-      .map((group) => ({
-        ...group,
-        date: new Date(group.date).toDateString(),
-        tasks: (group.tasks || [])
+      .map((group) => {
+        const groupTasks = (group.tasks || [])
           .map((id) => ({
             ...tasks[id],
             formattedDate: new Date(tasks[id].date).toDateString(),
@@ -35,7 +33,18 @@ export const getAllGroups = createSelector(
               (a.completed === b.completed ? 0 : a.completed - b.completed) ||
               (a.date === b.date ? 0 : b.date - a.date)
             );
-          }),
-      }));
+          });
+
+        const progress =
+          groupTasks.filter((task) => task.completed).length /
+          groupTasks.length;
+
+        return {
+          ...group,
+          date: new Date(group.date).toDateString(),
+          tasks: groupTasks,
+          progress,
+        };
+      });
   }
 );
