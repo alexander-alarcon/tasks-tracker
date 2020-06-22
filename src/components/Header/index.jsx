@@ -1,7 +1,8 @@
-import { string, func } from 'prop-types';
+import { string, func, bool } from 'prop-types';
 import React from 'react';
+import clsx from 'clsx';
 
-function Header({ title, date, onEdit, onRemove }) {
+function Header({ title, date, onEdit, onRemove, onCheck, isCompleted }) {
   const handleEdit = (ev) => {
     ev.preventDefault();
     onEdit();
@@ -12,17 +13,29 @@ function Header({ title, date, onEdit, onRemove }) {
     onRemove();
   };
 
+  const handleCheck = (ev) => {
+    ev.preventDefault();
+    onCheck();
+  };
+
   return (
-    <header className="flex items-center">
-      <div className="flex-1">
+    <header className="flex">
+      <div
+        className={clsx('flex-1', {
+          'line-through': isCompleted,
+        })}
+      >
         <div className="font-bold">{title}</div>
         <span className="text-xs italic opacity-75">{date}</span>
       </div>
-      <div className="actions flex items-center text-sm">
-        <span className="material-icons cursor-pointer">check_box</span>
-        <span className="material-icons cursor-pointer">
-          check_box_outline_blank
-        </span>
+      <div className="actions flex text-sm">
+        <a
+          href="#/"
+          onClick={handleCheck}
+          className="material-icons cursor-pointer"
+        >
+          {isCompleted ? 'check_box_outline_blank' : 'check_box'}
+        </a>
         <a
           href="#/"
           onClick={handleEdit}
@@ -44,14 +57,18 @@ function Header({ title, date, onEdit, onRemove }) {
 
 Header.defaultProps = {
   onEdit: () => {},
+  onCheck: () => {},
   onRemove: () => {},
+  isCompleted: false,
 };
 
 Header.propTypes = {
   title: string.isRequired,
   date: string.isRequired,
   onEdit: func,
+  onCheck: func,
   onRemove: func,
+  isCompleted: bool,
 };
 
 export default Header;

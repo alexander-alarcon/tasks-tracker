@@ -39,6 +39,7 @@ function TaskModal() {
         taskSlice.actions.addTask({
           id: generateId(),
           date: new Date().toDateString(),
+          completed: false,
           groupId,
           title,
           detail,

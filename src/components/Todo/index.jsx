@@ -21,6 +21,15 @@ function Todo({ data, borderColor }) {
     );
   };
 
+  const handleCheck = () => {
+    dispatch(
+      taskSlice.actions.editTask({
+        id: data.id,
+        changes: { completed: !data.completed },
+      })
+    );
+  };
+
   return (
     <div
       className={clsx(
@@ -33,6 +42,8 @@ function Todo({ data, borderColor }) {
         date={data.date}
         onEdit={handleEdit}
         onRemove={handleRemove}
+        onCheck={handleCheck}
+        isCompleted={data.completed}
       />
       <div className="todo__content text-sm italic">
         <p>{data.detail}</p>
