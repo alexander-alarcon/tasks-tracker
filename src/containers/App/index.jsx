@@ -1,7 +1,8 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
-import groupSlice, { getAllGroups } from '../../store/reducers/group';
+import { getAllGroups } from '../../store/selectors/group';
+import groupSlice from '../../store/reducers/group';
 import TodoList from '../../components/TodoList';
 import Button from '../../components/Button';
 import Footer from '../../components/Footer';

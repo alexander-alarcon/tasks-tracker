@@ -34,7 +34,7 @@ function Header({ title, date, onEdit, onRemove, onCheck, isCompleted }) {
           onClick={handleCheck}
           className="material-icons cursor-pointer"
         >
-          {isCompleted ? 'check_box_outline_blank' : 'check_box'}
+          {isCompleted ? 'check_box' : 'check_box_outline_blank'}
         </a>
         <a
           href="#/"

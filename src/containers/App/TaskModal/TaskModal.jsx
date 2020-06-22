@@ -1,10 +1,10 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
+import { nanoid } from '@reduxjs/toolkit';
 import taskSlice from '../../../store/reducers/tasks';
 import Modal from '../../../components/Modal';
 import Form from '../../../components/Form';
-import generateId from '../../../utils/misc';
 
 import {
   getModalIsOpen,
@@ -37,8 +37,8 @@ function TaskModal() {
     } else {
       dispatch(
         taskSlice.actions.addTask({
-          id: generateId(),
-          date: new Date().toDateString(),
+          id: nanoid(),
+          date: +new Date(),
           completed: false,
           groupId,
           title,

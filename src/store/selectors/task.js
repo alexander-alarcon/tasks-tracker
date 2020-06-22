@@ -1,8 +1,7 @@
 import { createSelector } from '@reduxjs/toolkit';
-import { getGroupEntities } from './group';
+import { emptyObject } from './utils';
 
-const emptyObject = {};
-export const getTaskEntities = ({ task }) => task.entities;
+import { getTaskEntities, getGroupEntities } from './entities';
 
 export const getModalIsOpen = ({ task }) => task.isModalOpen || false;
 

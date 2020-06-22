@@ -39,7 +39,7 @@ function Todo({ data, borderColor }) {
     >
       <Header
         title={data.title}
-        date={data.date}
+        date={data.formattedDate}
         onEdit={handleEdit}
         onRemove={handleRemove}
         onCheck={handleCheck}
@@ -57,11 +57,12 @@ export const TodoPropType = {
     id: string.isRequired,
     groupId: string.isRequired,
     title: string.isRequired,
-    date: string.isRequired,
+    formattedDate: string.isRequired,
     detail: string.isRequired,
   }).isRequired,
   borderColor: string.isRequired,
 };
 
 Todo.propTypes = TodoPropType;
+
 export default Todo;

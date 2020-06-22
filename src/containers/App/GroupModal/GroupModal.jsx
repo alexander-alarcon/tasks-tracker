@@ -1,7 +1,6 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-
-import generateId from '../../../utils/misc';
+import { nanoid } from '@reduxjs/toolkit';
 
 import Modal from '../../../components/Modal';
 import Form from '../../../components/Form';
@@ -35,8 +34,8 @@ function GroupModal() {
     } else {
       dispatch(
         groupSlice.actions.addGroup({
-          id: generateId(),
-          date: new Date().toDateString(),
+          id: nanoid(),
+          date: +new Date(),
           title,
           color,
         })

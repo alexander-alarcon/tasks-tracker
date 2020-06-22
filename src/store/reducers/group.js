@@ -13,22 +13,6 @@ const groupAdapter = createEntityAdapter({});
 
 const groupSelectors = groupAdapter.getSelectors();
 
-export const globalGroupSelectors = groupAdapter.getSelectors(
-  (state) => state.group
-);
-
-export const getAllGroups = (state) => {
-  const groups = globalGroupSelectors.selectAll(state);
-
-  return groups.map((group) => {
-    const tasks = group.tasks || [];
-    return {
-      ...group,
-      tasks: tasks.map((id) => globalTasksSelector.selectById(state, id)),
-    };
-  });
-};
-
 const groupSlice = createSlice({
   name: 'groups',
   initialState: groupAdapter.getInitialState({
