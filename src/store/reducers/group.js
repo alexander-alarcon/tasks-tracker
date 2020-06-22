@@ -1,5 +1,9 @@
 /* eslint-disable no-unused-vars */
-import { createSlice, createEntityAdapter } from '@reduxjs/toolkit';
+import {
+  createSlice,
+  createEntityAdapter,
+  createSelector,
+} from '@reduxjs/toolkit';
 
 import taskSlice, { globalTasksSelector } from './tasks';
 
@@ -14,6 +18,21 @@ export const globalGroupSelectors = groupAdapter.getSelectors(
 );
 
 const emptyArray = [];
+const emptyObject = {};
+
+export const getGroupEntities = ({ group }) => group.entities;
+
+export const getModalIsOpen = ({ group }) => group.isModalOpen || false;
+
+export const getModalCurrentId = ({ group }) => group.currentId || null;
+
+export const getModalGroup = createSelector(
+  getGroupEntities,
+  getModalCurrentId,
+  (entities, id) => {
+    return entities[id] || emptyObject;
+  }
+);
 
 export const getAllGroups = (state) => {
   const groups = globalGroupSelectors.selectAll(state);
@@ -29,11 +48,24 @@ export const getAllGroups = (state) => {
 
 const groupSlice = createSlice({
   name: 'groups',
-  initialState: groupAdapter.getInitialState(),
+  initialState: groupAdapter.getInitialState({
+    isModalOpen: false,
+    currentId: null,
+  }),
   reducers: {
+    /* eslint-disable no-param-reassign */
     addGroup: groupAdapter.addOne,
     removeGroup: groupAdapter.removeOne,
     editGroup: groupAdapter.updateOne,
+    openModal: (state, { payload: groupId = null }) => {
+      state.isModalOpen = true;
+      state.currentId = groupId;
+    },
+    closeModal: (state) => {
+      state.isModalOpen = false;
+      state.currentId = null;
+    },
+    /* eslint-enba no-param-reassign */
   },
   extraReducers: {
     [addTask]: (state, { payload }) => {

@@ -1,72 +1,23 @@
-import React, { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import React from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 
 import groupSlice, { getAllGroups } from '../../store/reducers/group';
-import taskSlice from '../../store/reducers/tasks';
 import TodoList from '../../components/TodoList';
 import Button from '../../components/Button';
 import Footer from '../../components/Footer';
-import Modal from '../../components/Modal';
-import Form from '../../components/Form';
 
-import generateId from '../../utils/misc';
+import GroupModal from './GroupModal';
 
 function App() {
-  const [isModalOpen, setIsModalOpen] = useState(false);
   const dispatch = useDispatch();
   const groups = useSelector(getAllGroups);
 
-  const handleAddGroup = (inputs) => {
-    dispatch(
-      groupSlice.actions.addGroup({
-        id: generateId(),
-        title: inputs.title,
-        color: inputs.color,
-        date: new Date().toDateString(),
-      })
-    );
-    setIsModalOpen(false);
-  };
-
-  const handleAddTask = () => {
-    dispatch(
-      taskSlice.actions.addTask({
-        id: Date.now(),
-        groupId: 1,
-        title: 'todo 1',
-        detail: 'lorem ipsum dolor sit amet',
-        date: new Date().toDateString(),
-      })
-    );
-  };
-
-  const handleModalClose = () => {
-    setIsModalOpen(false);
-  };
-
-  const handleModalOpen = () => {
-    setIsModalOpen(true);
+  const handleModalGroupOpen = () => {
+    dispatch(groupSlice.actions.openModal());
   };
 
   return (
     <div className="App bg-gray-200 flex flex-col min-h-screen">
-      <Modal
-        title="Add Group"
-        isOpen={isModalOpen}
-        onClose={handleModalClose}
-        onConfirm={handleModalClose}
-      >
-        <Form
-          titleConfig={{
-            id: 'title',
-            label: 'Group Title:',
-          }}
-          onSubmit={handleAddGroup}
-          onCancel={handleModalClose}
-          colors
-        />
-      </Modal>
-
       <div className="container relative mt-16 mx-auto sm:mb-16 sm:mt-0">
         <div className="lists__container grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 grid-rows-max-content overflow-auto">
           {groups.map((group) => (
@@ -77,12 +28,13 @@ function App() {
       <Footer>
         <Button
           text="New List"
-          onClick={handleModalOpen}
+          onClick={handleModalGroupOpen}
           color="teal"
           rounded
         />
-        <Button text="New Task" onClick={handleAddTask} color="blue" rounded />
       </Footer>
+
+      <GroupModal />
     </div>
   );
 }

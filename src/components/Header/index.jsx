@@ -1,7 +1,17 @@
-import { string } from 'prop-types';
+import { string, func } from 'prop-types';
 import React from 'react';
 
-function Header({ title, date }) {
+function Header({ title, date, onEdit, onRemove }) {
+  const handleEdit = (ev) => {
+    ev.preventDefault();
+    onEdit();
+  };
+
+  const handleRemove = (ev) => {
+    ev.preventDefault();
+    onRemove();
+  };
+
   return (
     <header className="flex items-center">
       <div className="flex-1">
@@ -13,16 +23,35 @@ function Header({ title, date }) {
         <span className="material-icons cursor-pointer">
           check_box_outline_blank
         </span>
-        <span className="material-icons cursor-pointer">edit</span>
-        <span className="material-icons cursor-pointer">delete</span>
+        <a
+          href="#/"
+          onClick={handleEdit}
+          className="material-icons cursor-pointer"
+        >
+          edit
+        </a>
+        <a
+          href="#/"
+          onClick={handleRemove}
+          className="material-icons cursor-pointer"
+        >
+          delete
+        </a>
       </div>
     </header>
   );
 }
 
+Header.defaultProps = {
+  onEdit: () => {},
+  onRemove: () => {},
+};
+
 Header.propTypes = {
   title: string.isRequired,
   date: string.isRequired,
+  onEdit: func,
+  onRemove: func,
 };
 
 export default Header;

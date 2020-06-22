@@ -1,7 +1,9 @@
 import { shape, string, arrayOf } from 'prop-types';
+import { useDispatch } from 'react-redux';
 import React from 'react';
 import clsx from 'clsx';
 
+import groupSlice from '../../store/reducers/group';
 import Todo, { TodoPropType } from '../Todo';
 import Button from '../Button';
 import Header from '../Header';
@@ -9,7 +11,16 @@ import Header from '../Header';
 import COLORS from '../../utils/colors';
 
 function TodoList({ group }) {
+  const dispatch = useDispatch();
   const color = COLORS[group.color || 'blue'];
+
+  const handleOpenModal = () => {
+    dispatch(groupSlice.actions.openModal(group.id));
+  };
+
+  const handleRemoveGroup = () => {
+    dispatch(groupSlice.actions.removeGroup(group.id));
+  };
 
   return (
     <div
@@ -25,7 +36,12 @@ function TodoList({ group }) {
           color.foreground
         )}
       >
-        <Header title={group.title} date={group.date} />
+        <Header
+          title={group.title}
+          date={group.date}
+          onEdit={handleOpenModal}
+          onRemove={handleRemoveGroup}
+        />
       </div>
       <div className={clsx('border-t', color.border)}>
         <Button text="New item" color={group.color} size="w-full" />
