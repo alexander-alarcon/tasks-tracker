@@ -30,8 +30,9 @@ function TodoList({ group }) {
   return (
     <div
       className={clsx(
-        'wrapper m-4 border rounded-lg shadow-lg bg-white overflow-y-auto',
-        color.border
+        'wrapper m-4 border rounded-lg shadow-lg overflow-y-auto',
+        color.border,
+        color.lightBackground
       )}
     >
       <div
