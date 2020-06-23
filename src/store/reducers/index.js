@@ -1,16 +1,25 @@
 import { combineReducers } from '@reduxjs/toolkit';
+import storage from 'redux-persist/lib/storage';
+import { persistReducer } from 'redux-persist';
 
-import helloReducer from './hello';
 import groupSlice from './group';
 import taskSlice from './tasks';
 
-const rootReducer = combineReducers({
-  hello: helloReducer,
-  group: groupSlice.reducer,
-  task: taskSlice.reducer,
-  pepe: {},
-});
+const groupPersistConfig = {
+  key: 'group',
+  storage,
+  blacklist: ['isModalOpen', 'currentId'],
+};
 
-export type RootState = ReturnType<typeof rootReducer>;
+const taskPersistConfig = {
+  key: 'task',
+  storage,
+  blacklist: ['isModalOpen', 'currentId', 'groupId'],
+};
+
+const rootReducer = combineReducers({
+  group: persistReducer(groupPersistConfig, groupSlice.reducer),
+  task: persistReducer(taskPersistConfig, taskSlice.reducer),
+});
 
 export default rootReducer;

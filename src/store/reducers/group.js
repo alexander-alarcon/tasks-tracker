@@ -1,11 +1,6 @@
-/* eslint-disable no-unused-vars */
-import {
-  createSlice,
-  createEntityAdapter,
-  createSelector,
-} from '@reduxjs/toolkit';
+import { createSlice, createEntityAdapter } from '@reduxjs/toolkit';
 
-import taskSlice, { globalTasksSelector } from './tasks';
+import taskSlice from './tasks';
 
 const { addTask, removeTask } = taskSlice.actions;
 
