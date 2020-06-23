@@ -2,16 +2,16 @@ import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { nanoid } from '@reduxjs/toolkit';
 
-import Modal from '../../../components/Modal';
-import Form from '../../../components/Form';
+import Modal from '../../components/Modal';
+import Form from '../../components/Form';
 
-import groupSlice from '../../../store/reducers/group';
+import groupSlice from '../../store/reducers/group';
 
 import {
   getModalIsOpen,
   getModalCurrentId,
   getModalGroup,
-} from '../../../store/selectors/group';
+} from '../../store/selectors/group';
 
 function GroupModal() {
   const dispatch = useDispatch();

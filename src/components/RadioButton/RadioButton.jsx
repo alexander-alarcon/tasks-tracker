@@ -1,5 +1,5 @@
+import { func, bool, string } from 'prop-types';
 import React, { useState } from 'react';
-import { PropTypes } from 'prop-types';
 import clsx from 'clsx';
 
 function RadioButton({ id, bgColor, value, checked, onChange: handleChange }) {
@@ -50,11 +50,11 @@ function RadioButton({ id, bgColor, value, checked, onChange: handleChange }) {
 }
 
 RadioButton.propTypes = {
-  id: PropTypes.string.isRequired,
-  bgColor: PropTypes.string.isRequired,
-  value: PropTypes.string.isRequired,
-  checked: PropTypes.bool,
-  onChange: PropTypes.func,
+  id: string.isRequired,
+  bgColor: string.isRequired,
+  value: string.isRequired,
+  checked: bool,
+  onChange: func,
 };
 
 RadioButton.defaultProps = {

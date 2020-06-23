@@ -2,9 +2,9 @@ import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
 import { nanoid } from '@reduxjs/toolkit';
-import taskSlice from '../../../store/reducers/tasks';
-import Modal from '../../../components/Modal';
-import Form from '../../../components/Form';
+import taskSlice from '../../store/reducers/tasks';
+import Modal from '../../components/Modal';
+import Form from '../../components/Form';
 
 import {
   getModalIsOpen,
@@ -12,7 +12,7 @@ import {
   getModalGroupId,
   getModalTask,
   getModalColor,
-} from '../../../store/selectors/task';
+} from '../../store/selectors/task';
 
 function TaskModal() {
   const dispatch = useDispatch();

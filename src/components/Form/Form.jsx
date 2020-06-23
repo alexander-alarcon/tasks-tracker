@@ -1,7 +1,7 @@
 import { string, func, bool, shape } from 'prop-types';
 import React, { useState } from 'react';
 
-import RadioButton from '../Radio';
+import RadioButton from '../RadioButton/RadioButton';
 import Button from '../Button';
 
 import COLORS from '../../utils/colors';

@@ -1,5 +1,5 @@
-import React, { useRef, useEffect } from 'react';
 import { bool, func, string, arrayOf, node, oneOfType } from 'prop-types';
+import React, { useRef, useEffect } from 'react';
 
 import ReactDOM from 'react-dom';
 
